@@ -25,3 +25,13 @@ func TestStoresServiceOK(t *testing.T) {
 	assert.Equal(t, newCustomer.LastName, customerCreated.LastName)
 
 }
+
+func TestLoadOK(t *testing.T) {
+	repo := NewRepository()
+	service := NewService(repo)
+
+	err := service.LoadAllCustomers()
+
+	assert.Nil(t, nil, err)
+
+}

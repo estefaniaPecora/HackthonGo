@@ -10,7 +10,7 @@ import (
 )
 
 type Repository interface {
-	SaveData(invoice models.Invoice) (models.Invoice, error)
+	SaveInvoices(invoice models.Invoice) (models.Invoice, error)
 }
 
 type repository struct {
@@ -20,7 +20,7 @@ func NewRepository() Repository {
 	return &repository{}
 }
 
-func (repo *repository) SaveData(invoice models.Invoice) (models.Invoice, error) {
+func (repo *repository) SaveInvoices(invoice models.Invoice) (models.Invoice, error) {
 	DbStarted := db.StorageDB
 	stmt, err := DbStarted.Prepare("INSERT INTO invoices(datetime, total, idcustomer) VALUES(?, ?, ?)")
 
