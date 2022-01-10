@@ -12,20 +12,37 @@ var (
 )
 
 func init() {
-	dataSource := "root@tcp(localhost:3306)/dbproductos"
+	dataSource := "root@tcp(localhost:3306)/dbhackaton"
 
 	var err error
-	db, err := sql.Open("mysql", dataSource)
+	StorageDB, err = sql.Open("mysql", dataSource)
 	if err != nil {
 		panic(err)
 	}
 
-	if err = db.Ping(); err != nil {
+	if err = StorageDB.Ping(); err != nil {
 		panic(err)
 	}
-
-	StorageDB = db
 
 	log.Println("DataBase Configured")
 
 }
+
+// func InitDB() {
+// 	dataSource := "root@tcp(localhost:3306)/dbhackaton"
+
+// 	var err error
+// 	db, err := sql.Open("mysql", dataSource)
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// 	if err = db.Ping(); err != nil {
+// 		panic(err)
+// 	}
+
+// 	StorageDB = db
+
+// 	log.Println("DataBase Configured")
+
+// }

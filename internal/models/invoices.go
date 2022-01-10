@@ -1,8 +1,8 @@
 package models
 
-type Sales struct {
+type Invoice struct {
 	ID         int     `json:"id"`
 	DateTime   string  `json:"date_time"`
-	IdCustomer int     `json:"id_customer"`
 	Total      float64 `json:"total"`
+	IdCustomer int     `json:"id_customer"`
 }

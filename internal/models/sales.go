@@ -1,6 +1,6 @@
 package models
 
-type Sales struct {
+type Sale struct {
 	ID         int     `json:"id"`
 	Id_product int     `json:"id_product"`
 	Id_invoice int     `json:"id_invoice"`
