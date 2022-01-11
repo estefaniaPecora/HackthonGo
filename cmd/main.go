@@ -10,6 +10,8 @@ import (
 
 	"github.com/estefaniaPecora/HackthonGo/internal/customers"
 	"github.com/estefaniaPecora/HackthonGo/internal/invoices"
+	"github.com/estefaniaPecora/HackthonGo/internal/products"
+	"github.com/estefaniaPecora/HackthonGo/internal/sales"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,6 +20,12 @@ var service = customers.NewService(repo)
 
 var invoice_repo = invoices.NewRepository()
 var invoice_service = invoices.NewService(invoice_repo)
+
+var product_repo = products.NewRepository()
+var product_service = products.NewService(product_repo)
+
+var sale_repo = sales.NewRepository()
+var sale_service = sales.NewService(sale_repo)
 
 func SaveOne(c *gin.Context) {
 
@@ -57,6 +65,21 @@ func Load(c *gin.Context) {
 			id_customer, _ := strconv.Atoi(items[2])
 
 			_, err := invoice_service.SaveInvoices(date_time, total, id_customer)
+			if err != nil {
+				log.Fatal(err)
+			}
+		case "products":
+			price, _ := strconv.ParseFloat(items[2], 64)
+			_, err := product_service.SaveProducts(items[1], price)
+			if err != nil {
+				log.Fatal(err)
+			}
+		case "sales":
+			quantity, _ := strconv.ParseFloat(items[3], 64)
+			idinvoice, _ := strconv.Atoi(items[1])
+			idproduct, _ := strconv.Atoi(items[2])
+
+			_, err := sale_service.SaveSales(quantity, idinvoice, idproduct)
 			if err != nil {
 				log.Fatal(err)
 			}
